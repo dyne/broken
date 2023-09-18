@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/dyne/starters",
+  "commit": "76505fb8197d7e0e3eeb0028e226891fefe764d9",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "broken",
+      "project_description": "Report broken links of Dyne.org website",
+      "full_name": "Puria Nafisi Azizi",
+      "email": "puria@dyne.org",
+      "project_slug": "broken",
+      "repo": "https://github.com/dyne/broken",
+      "_copy_without_render": [
+        "*.svelte"
+      ],
+      "_template": "https://github.com/dyne/starters"
+    }
+  },
+  "directory": "saas"
+}
