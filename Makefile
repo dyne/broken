@@ -13,6 +13,8 @@ setup_git: ## 📦 Setup the Git (if not already done)
 
 setup_submodules: setup_git ## 📦 Setup the submodules
 	@echo "📦 Setup the submodules"
+	rm -rf admin/zencode/zenflows-crypto
+	cd admin && git submodule add -f https://github.com/interfacerproject/zenflows-crypto zencode/zenflows-crypto
 	@echo " "
 
 setup_backend: ## 📦 Setup the frontend
