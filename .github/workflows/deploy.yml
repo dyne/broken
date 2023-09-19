@@ -10,4 +10,4 @@ jobs:
     secrets: inherit
     with:
       project_name: broken
-      fqdn: "http://159.69.20.15:8091"
+      fqnd: "http://159.69.20.15:8091"
