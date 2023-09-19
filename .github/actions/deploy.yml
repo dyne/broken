@@ -1,0 +1,13 @@
+name: 🚀 Backend deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    uses: dyne/workflows/.github/workflows/pocketbase-deploy.yml@main
+    secrets: inherit
+    with:
+      project_name: broken
+      fqdn: "http://159.69.20.15:8091"
