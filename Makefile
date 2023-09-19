@@ -13,10 +13,6 @@ setup_git: ## 📦 Setup the Git (if not already done)
 
 setup_submodules: setup_git ## 📦 Setup the submodules
 	@echo "📦 Setup the submodules"
-	rm -rf admin/zencode/zenflows-crypto
-	rm -rf webapp/zenflows-crypto
-	cd admin && git submodule add -f https://github.com/interfacerproject/zenflows-crypto zencode/zenflows-crypto
-	cd webapp && git submodule add -f https://github.com/interfacerproject/zenflows-crypto zenflows-crypto
 	@echo " "
 
 setup_backend: ## 📦 Setup the frontend
@@ -43,11 +39,20 @@ setup: setup_submodules setup_backend setup_frontend ## 📦 Setup the project
 # before the webapp tries to connect to it and generate the schema
 # check the webapp/package.json for the predev and prebuild scripts
 
+be: ## ⚙️ Run the backend
+	./admin/pb serve
+
+fe: ## ⚙️ Run the frontend
+	sleep 2 && cd webapp && pnpm serve
+
+fe_dev: ## ⚙️ Watch the frontend
+	sleep 2 && cd webapp && pnpm dev
+
 dev: ## ⚙️ Run the project in development mode
-	./admin/pb serve & (sleep 2 && cd webapp && pnpm dev)
+	$(MAKE) be fe_dev -j2
 
 up: setup ## ⚙️ Run the project
-	./admin/pb serve & (sleep 2 && cd webapp && pnpm serve)
+	$(MAKE) be fe -j2
 
 doc: ## 📚 Serve documentation on localhost
 	npx -p docsify-cli docsify serve ./docs
@@ -72,8 +77,8 @@ clean_build: ## 🧹 Clean project build
 	@echo "🧹 Clean project build"
 	rm -f admin/pb
 	rm -fr webapp/node_modules
-	rm -f webapp/src/lib/pocketbase-types.ts
-	rm -f webapp/src/lib/schema/pb_schema.json
+	rm -f webapp/src/lib/pocketbase/types.ts
+	rm -f webapp/src/lib/pocketbase/schema/db_schema.json
 	@echo " "
 
 clean: clean_submodules clean_build ## 🧹 Clean the project

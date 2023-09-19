@@ -21,6 +21,8 @@ import (
 	"github.com/pocketbase/pocketbase/models"
 	"github.com/pocketbase/pocketbase/plugins/jsvm"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
+
+	"pb/webauthn"
 )
 
 func main() {
@@ -101,9 +103,10 @@ func main() {
 		return nil
 	})
 
+	webauthn.Register(app)
 	hooks.Register(app)
-	jsvm.MustRegisterMigrations(app, &jsvm.MigrationsOptions{})
-	migratecmd.MustRegister(app, app.RootCmd, &migratecmd.Options{
+	jsvm.MustRegister(app, jsvm.Config{})
+	migratecmd.MustRegister(app, app.RootCmd, migratecmd.Config{
 		TemplateLang: migratecmd.TemplateLangJS,
 		Automigrate:  true,
 	})
